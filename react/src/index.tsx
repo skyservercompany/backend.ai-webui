@@ -51,8 +51,8 @@ const KeypairInfoModal = React.lazy(
   () => import('./components/KeypairInfoModal'),
 );
 const SignoutModal = React.lazy(() => import('./components/SignoutModal'));
-
 const ErrorLogList = React.lazy(() => import('./components/ErrorLogList'));
+const UserList = React.lazy(() => import('./components/UserList'));
 
 customElements.define(
   'backend-ai-react-session-list',
@@ -255,6 +255,17 @@ customElements.define(
     return (
       <DefaultProviders {...props}>
         <ErrorLogList />
+      </DefaultProviders>
+    );
+  }),
+);
+
+customElements.define(
+  'backend-ai-react-user-list',
+  reactToWebComponent((props) => {
+    return (
+      <DefaultProviders {...props}>
+        <UserList />
       </DefaultProviders>
     );
   }),
