@@ -83,6 +83,7 @@ export default class BackendAICredentialView extends BackendAIPage {
   @property({ type: Boolean }) enableParsingStoragePermissions = false;
   @property({ type: String }) activeUserInnerTab = 'active';
   @property({ type: String }) activeCredentialInnerTab = 'active';
+  @property({ type: Boolean }) isSupportReactUserNode = false;
   @query('#active-credential-list')
   activeCredentialList!: BackendAICredentialList;
   @query('#inactive-credential-list')
@@ -304,6 +305,8 @@ export default class BackendAICredentialView extends BackendAIPage {
         this.isSuperAdmin = true;
       }
     }
+    this.isSupportReactUserNode =
+      globalThis.backendaiclient?.supports('user_nodes');
     this._activeTab = 'user-lists';
     this._addValidatorToPolicyInput();
     this._getResourceInfo();
@@ -1238,8 +1241,8 @@ export default class BackendAICredentialView extends BackendAIPage {
                 : html``
             }
           </h3>
-          <backend-ai-react-user-list style="display: ${this._activeTab === 'user-lists' ? 'block' : 'none'};"></backend-ai-react-user-list>
-          <div id="user-lists" class="admin item tab-content card">
+          <backend-ai-react-user-list style="display: ${this.isSupportReactUserNode && this._activeTab === 'user-lists' ? 'block' : 'none'};"></backend-ai-react-user-list>
+          <div id="user-lists" class="admin item tab-content card" style="display: ${!this.isSupportReactUserNode && this._activeTab === 'user-lists' ? 'block' : 'none'};">
             <h4 class="horizontal flex center center-justified layout">
               <mwc-tab-bar class="sub-bar">
                 <mwc-tab title="active-user-list" label="${_t(
