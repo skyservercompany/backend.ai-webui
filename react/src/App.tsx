@@ -18,6 +18,7 @@ import { RecoilRoot } from 'recoil';
 import { QueryParamProvider } from 'use-query-params';
 import { ReactRouter6Adapter } from 'use-query-params/adapters/react-router-6';
 
+const StatisticsPage = React.lazy(() => import('./pages/StatisticsPage'));
 const Information = React.lazy(() => import('./components/Information'));
 const ServingListPage = React.lazy(() => import('./pages/ServingListPage'));
 const EnvironmentPage = React.lazy(() => import('./pages/EnvironmentPage'));
@@ -110,6 +111,7 @@ const router = createBrowserRouter([
       {
         path: '/statistics',
         handle: { labelKey: 'webui.menu.Statistics' },
+        Component: StatisticsPage,
       },
       {
         path: '/environment',
